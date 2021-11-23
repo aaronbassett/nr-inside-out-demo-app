@@ -1,0 +1,11 @@
+{
+  "name": "inside-out-demo-app",
+  "version": "0.1.0",
+  "description": "Inside Out Demo App",
+  "author": "Aaron Bassett",
+  "license": "MIT",
+  "dependencies": {
+    "serverless-newrelic-lambda-layers": "^2.2.0",
+    "serverless-python-requirements": "^5.1.1"
+  }
+}

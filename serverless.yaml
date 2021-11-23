@@ -1,0 +1,52 @@
+service: inside-out-demo-app
+
+package:
+  individually: true
+
+provider:
+  name: aws
+  runtime: python3.8
+  region: eu-west-1
+  stage: ${opt:stage, "dev"}
+
+plugins:
+  - serverless-python-requirements
+  - serverless-newrelic-lambda-layers
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+    layer:
+      name: inside-out-app-demo-layer
+      description: Inside Out Demo App
+      compatibleRuntimes:
+        - python3.8
+  newRelic:
+    accountId:
+    apiKey:
+    enableExtension: true
+    enableIntegration: true
+    logEnabled: true
+
+functions:
+  app:
+    package:
+      include:
+        - "main.py"
+      exclude:
+        - "requirements.txt"
+        - "package.json"
+        - "package-lock.json"
+        - ".serverless/**"
+        - "__pycache__/**"
+        - "node_modules/**"
+
+    handler: main.handler
+    environment:
+      STAGE: ${self:provider.stage}
+    layers:
+      - { Ref: PythonRequirementsLambdaLayer }
+    events:
+      - http:
+          method: any
+          path: /uuid

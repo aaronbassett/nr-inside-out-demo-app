@@ -1,0 +1,4 @@
+fastapi==0.70.0  # https://fastapi.tiangolo.com/
+uvicorn==0.15.0  # https://www.uvicorn.org/
+mangum==0.12.3  # https://mangum.io/
+black==21.10b0  # https://black.readthedocs.io/en/stable/
